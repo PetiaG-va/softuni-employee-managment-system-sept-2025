@@ -1,6 +1,16 @@
+import { useEffect } from "react";
 import UserItem from "./UserItem.jsx";
 
 export default function UserList() {
+    useEffect(() => {
+        fetch('http://localhost:3030/jsonstore/users')
+            .then(response => response.json())
+            .then(result => {
+                console.log(result);
+                
+            })
+    }, [])
+
     return (
         <div className="table-wrapper">            
             <table className="table">
