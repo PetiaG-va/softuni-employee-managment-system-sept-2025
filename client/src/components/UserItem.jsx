@@ -1,3 +1,5 @@
+import { fromIsoDate } from "../utils/dateTimeUtils.js";
+
 export default function UserItem({
     _id,
     firstName,
@@ -22,7 +24,7 @@ export default function UserItem({
             <td>{email}</td>
             <td>{phoneNumber}</td>
             {/* <td>June 28, 2022</td> */}
-            <td>{createdAt}</td>
+            <td>{fromIsoDate(createdAt)}</td>
             <td className="actions">
                 <button className="btn edit-btn" title="Edit">
                     <svg
