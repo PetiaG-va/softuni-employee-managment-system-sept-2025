@@ -3,7 +3,7 @@ import Footer from "./components/Footer.jsx";
 import Search from "./components/Search.jsx";
 import UserList from "./components/UserList.jsx";
 import Pagination from "./components/Pagination.jsx";
-import CreateUser from "./components/CreateUser.jsx";
+import CreateUserModal from "./components/CreateUserModal.jsx";
 
 import { useState } from "react";
 
@@ -12,6 +12,10 @@ export default function App() {
 
   const addUserClickHandler = () => {
     setShowCreateUser(true);
+  };
+
+  const closeUserModalHandler = () => {
+    setShowCreateUser(false);
   }
 
   return (
@@ -30,7 +34,7 @@ export default function App() {
 
         </section>
 
-        {showCreateUser && <CreateUser />}
+        {showCreateUser && <CreateUserModal onClose={closeUserModalHandler} />}
 
       </main>
       <Footer />
