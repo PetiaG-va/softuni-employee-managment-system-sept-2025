@@ -18,7 +18,7 @@ export default function CreateUserModal({
                             </svg>
                         </button>
                     </header>
-                    <form onSubmit={}>
+                    <form onSubmit={onSubmit}>
                         <div class="form-row">
                             <div class="form-group">
                                 <label for="firstName">First name</label>
