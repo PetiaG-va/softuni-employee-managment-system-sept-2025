@@ -5,10 +5,22 @@ import UserList from "./components/UserList.jsx";
 import Pagination from "./components/Pagination.jsx";
 import CreateUserModal from "./components/CreateUserModal.jsx";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 export default function App() {
+  const [users, setUsers] = useState([]);
   const [showCreateUser, setShowCreateUser] = useState(false);
+
+  useEffect(() => {
+    fetch('http://localhost:3030/jsonstore/users')
+      .then(response => response.json())
+      .then(result => {
+        setUsers(Object.values(result));
+      })
+      .catch((err) => alert(err.message));
+  }, []);
+
+
 
   const addUserClickHandler = () => {
     setShowCreateUser(true);
@@ -17,20 +29,24 @@ export default function App() {
   const closeUserModalHandler = () => {
     setShowCreateUser(false);
   };
-  
+
   const addUserSubmitHandler = (event) => {
+    // stop page refresh
     event.preventDefault();
 
+    //get form data
     const formData = new FormData(event.target);
 
-    const {country, city, street, streetNumber, ...userData} = Object.fromEntries(formData);
+    // transform formData to userData
+    const { country, city, street, streetNumber, ...userData } = Object.fromEntries(formData);
     userData.address = {
-      country, 
-      city, 
-      street, 
+      country,
+      city,
+      street,
       streetNumber
     }
 
+    // create new user request
     userData.createAt = new Date().toISOString();
     userData.updateAt = new Date().toISOString();
 
@@ -44,7 +60,7 @@ export default function App() {
       .then(response => response.json())
       .then(result => {
         console.log(result);
-        
+
       })
   };
 
@@ -56,7 +72,7 @@ export default function App() {
         <section className="card users-container">
           <Search />
 
-          <UserList />
+          <UserList users={users} />
 
           <button className="btn-add btn" onClick={addUserClickHandler}>Add new user</button>
 
@@ -64,11 +80,11 @@ export default function App() {
 
         </section>
 
-        {showCreateUser && 
-          <CreateUserModal 
-            onClose={closeUserModalHandler} 
+        {showCreateUser &&
+          <CreateUserModal
+            onClose={closeUserModalHandler}
             onSubmit={addUserSubmitHandler}
-        />}
+          />}
 
       </main>
       <Footer />
