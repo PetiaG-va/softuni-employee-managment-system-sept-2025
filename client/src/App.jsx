@@ -3,7 +3,7 @@ import Footer from "./components/Footer.jsx";
 import Search from "./components/Search.jsx";
 import UserList from "./components/UserList.jsx";
 import Pagination from "./components/Pagination.jsx";
-import CreateUserModal from "./components/CreateUserModal.jsx";
+import UserSaveModal from "./components/UserSaveModal.jsx";
 
 import { useEffect, useState } from "react";
 
@@ -86,7 +86,7 @@ export default function App() {
         </section>
 
         {showCreateUser &&
-          <CreateUserModal
+          <UserSaveModal
             onClose={closeUserModalHandler}
             onSubmit={addUserSubmitHandler}
           />}
