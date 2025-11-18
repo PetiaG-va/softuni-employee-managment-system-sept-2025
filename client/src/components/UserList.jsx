@@ -5,7 +5,7 @@ import UserItem from "./UserItem.jsx";
 export default function UserList({
     users,
 }) {
-    const [shwoUserDetails, setShowUserDetails] = useState(false);
+    const [showUserDetails, setShowUserDetails] = useState(false);
     const [selectedUserId, setSelectedUserId] = useState(null);
 
     const detailsActionClickHandler = (userId) => {
@@ -121,13 +121,12 @@ export default function UserList({
                         <UserItem
                             {...user}
                             key={user._id}
-                            user={user}
                             onDetailsClick={detailsActionClickHandler}
                         />
                     ))}
                 </tbody>
             </table>
-            {shwoUserDetails && (
+            {showUserDetails && (
 
                 <UserDetails 
                     userId={selectedUserId} 
